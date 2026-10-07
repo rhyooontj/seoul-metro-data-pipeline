@@ -13,6 +13,17 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./sql/000_create_subway_arrival.sql:/docker-entrypoint-initdb.d/000_create_subway_arrival.sql:ro
+      - ./sql/001_create_pipeline_load_history.sql:/docker-entrypoint-initdb.d/001_create_pipeline_load_history.sql:ro
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -h 127.0.0.1 -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
 
 
   airflow:
@@ -44,7 +55,8 @@ services:
       - ./metro_dbt:/opt/airflow/metro_dbt
 
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
 
   metabase:
