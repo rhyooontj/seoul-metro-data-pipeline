@@ -7,3 +7,8 @@ sources:
 
     tables:
       - name: subway_arrival
+        columns:
+          - name: id
+            data_tests:
+              - not_null
+              - unique

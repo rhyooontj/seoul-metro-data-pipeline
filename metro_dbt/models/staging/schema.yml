@@ -20,3 +20,23 @@ models:
         description: API 데이터 수신 시각
         data_tests:
           - not_null
+
+      - name: subway_id
+        data_tests:
+          - not_null
+
+      - name: station_id
+        data_tests:
+          - not_null
+
+      - name: direction
+        data_tests:
+          - not_null
+
+      - name: train_line
+        data_tests:
+          - not_null
+
+      - name: arrival_seconds
+        data_tests:
+          - not_null

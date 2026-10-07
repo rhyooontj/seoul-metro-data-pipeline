@@ -1,5 +1,20 @@
 # Seoul Metro Data Pipeline
 
+## dbt 데이터 품질 검증
+
+Airflow는 기존 `dbt run → dbt test` 순서로 모델 생성과 품질 검증을 수행합니다.
+source의 `id`는 `not_null`과 `unique`로 PRIMARY KEY 의미를 검증합니다.
+staging은 기존 ID 검증과 함께 역, 노선, 방향, 도착시간, 수신 시각의 핵심 필수값을 검증합니다.
+mart는 필수값, `(station_name, direction, train_line)` grain의 유일성,
+양수 도착 건수와 `최소 도착시간 ≤ 평균 도착시간 ≤ 최대 도착시간`을 검증합니다.
+
+ID를 제외한 업무 컬럼 전체가 같은 exact duplicate는 `severity='warn'` 테스트로 관측합니다.
+이 테스트는 중복 그룹을 반환하며 기존 데이터를 삭제하거나 수정하지 않습니다.
+`store_failures`는 사용하지 않고, warning을 error로 승격하지 않는 실행 설정을 유지합니다.
+동일 processed 파일 재처리를 막는 배치 멱등성과 서로 다른 배치의 semantic duplicate는
+별도 문제이며, 현재 품질 테스트는 후자의 존재를 관측합니다.
+freshness, 방향 허용값, 최종 수집량 조건과 deduplication은 별도 개선 과제로 보류합니다.
+
 서울시 지하철 도착정보를 30분마다 수집하고 PostgreSQL에 적재한 뒤,
 dbt로 분석 모델을 생성하는 프로젝트입니다. Metabase는 분석 데이터를 조회합니다.
 

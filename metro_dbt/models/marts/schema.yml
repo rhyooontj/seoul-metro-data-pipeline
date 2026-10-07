@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: mart_station_arrival_summary
+    description: 역, 방향, 열차 노선별 도착정보 집계
+    columns:
+      - name: station_name
+        data_tests:
+          - not_null
+      - name: direction
+        data_tests:
+          - not_null
+      - name: train_line
+        data_tests:
+          - not_null
+      - name: arrival_count
+        data_tests:
+          - not_null
+      - name: latest_received_at
+        data_tests:
+          - not_null
