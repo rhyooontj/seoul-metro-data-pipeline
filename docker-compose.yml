@@ -1,0 +1,62 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: seoul-metro-postgres
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+
+    container_name: seoul-metro-airflow
+
+    command: standalone
+
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+
+      SEOUL_API_KEY: ${SEOUL_API_KEY}
+
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./src:/opt/airflow/src
+      - ./data:/opt/airflow/data
+      - ./metro_dbt:/opt/airflow/metro_dbt
+
+    depends_on:
+      - postgres
+
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: seoul-metro-metabase
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - postgres
+
+
+volumes:
+  postgres_data:

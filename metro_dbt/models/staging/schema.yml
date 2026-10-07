@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_subway_arrival
+    description: 서울시 지하철 실시간 도착정보를 정리한 staging 모델
+
+    columns:
+      - name: arrival_id
+        description: 도착정보 고유 ID
+        data_tests:
+          - not_null
+          - unique
+
+      - name: station_name
+        description: 지하철역 이름
+        data_tests:
+          - not_null
+
+      - name: received_at
+        description: API 데이터 수신 시각
+        data_tests:
+          - not_null

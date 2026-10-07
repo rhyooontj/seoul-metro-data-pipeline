@@ -1,1 +1,36 @@
 .env
+.venv/
+
+# Local environment files
+.env.*
+!.env.example
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Runtime logs and collected data
+/logs/
+*.log
+/data/
+
+# dbt generated artifacts and local identity
+/metro_dbt/target/
+/metro_dbt/logs/
+/metro_dbt/dbt_packages/
+/metro_dbt/.user.yml
+
+# Airflow local state
+/airflow.db*
+/airflow.cfg
+/airflow-webserver.pid
+/airflow-webserver.out
+/standalone_admin_password.txt
+/simple_auth_manager_passwords.json*
+
+# Metabase local state
+/metabase.db/
+metabase.db*
