@@ -32,4 +32,3 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   metro_dbt:
     # Config indicated by + and applies to all files under models/example/
-
