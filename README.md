@@ -1,5 +1,44 @@
 # Seoul Metro Data Pipeline
 
+## CI
+
+GitHub Actions의 `.github/workflows/ci.yml`은 PR과 `main` push에서 실행됩니다.
+`static_and_unit` job은 변경 범위의 whitespace, Python 문법, mock 기반 unittest와
+`docker compose config --quiet`를 검사합니다. DAG는 import하지 않고 compile만 합니다.
+`postgres_dbt_integration` job은 run별 고유 컨테이너와 빈 volume에서 PostgreSQL 17을
+시작하고, 실제 `000` 및 `001` SQL을 read-only mount하여 공식 entrypoint 초기화를 검증합니다.
+TCP healthcheck가 통과한 뒤 컬럼·PK·시퀀스·초기 빈 테이블을 읽기 전용으로 확인합니다.
+
+CI 전용 synthetic fixture는 7행과 5개 mart grain을 포함합니다. 동일 업무 행 2개는
+새로운 id를 받아 exact duplicate WARN을 재현합니다. 이후 `dbt parse → dbt run → dbt test`를
+실행하고 일반 테스트 PASS와 중복 테스트 WARN을 결과 artifact로 확인합니다.
+결과 검사는 테스트 총수를 고정하지 않고 manifest의 활성 테스트와 실행 결과를 대조합니다.
+`dbt test` 세션은 read-only이며 실패 행을 DB에 저장하지 않습니다.
+성공·실패에 관계없이 이름과 소유 label이 일치하는 CI 컨테이너·volume만 정리합니다.
+
+운영 API, 운영 DB, GitHub 운영 secret과 `.env`는 사용하지 않습니다.
+workflow의 DB 자격증명과 API 키 형태의 값은 CI에서만 사용하는 synthetic 값입니다.
+fixture는 운영 DB에 실행하면 안 됩니다. 실제 entrypoint 초기화와 dbt run/fixture INSERT는
+오직 일회성 CI DB에서만 허용합니다.
+
+로컬에서 저장소 루트와 별도 Python 환경을 사용해 다음 검사를 실행할 수 있습니다.
+로컬 `.env`를 읽지 않도록 테스트 프로세스에만 dotenv 비활성화를 적용합니다.
+
+```powershell
+python -m pip install -r requirements-ci.txt
+git diff --check
+python -B -c "import unittest; from unittest.mock import patch; patch('dotenv.load_dotenv', return_value=False).start(); result=unittest.TextTestRunner().run(unittest.defaultTestLoader.discover('tests', pattern='test_*.py')); raise SystemExit(not result.wasSuccessful())"
+```
+
+CI의 unittest 명령은 `python -B -m unittest discover -s tests -p "test_*.py"`입니다.
+PR의 whitespace 검사는 PR base와 HEAD를 비교하고, push는 이전 commit과 HEAD를 비교합니다.
+비교 기준이 없는 최초 push 등에서는 전체 tracked tree를 검사합니다.
+로컬의 `git diff --check`는 아직 commit하지 않은 변경을 확인하는 용도입니다.
+PostgreSQL/dbt 통합 검증은 별도 임시 DB와 synthetic 환경변수를 준비한 경우에만 실행합니다.
+`scripts/ci_verify_schema.py`는 `CI_SCHEMA_VERIFY=1`을 요구하며,
+`scripts/ci_verify_dbt_results.py`는 기본적으로 `metro_dbt/target/run_results.json`과
+같은 디렉터리의 `manifest.json`을 읽습니다.
+
 ## dbt 데이터 품질 검증
 
 Airflow는 기존 `dbt run → dbt test` 순서로 모델 생성과 품질 검증을 수행합니다.

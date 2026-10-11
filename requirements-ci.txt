@@ -1,0 +1,6 @@
+# Versions verified in the development environment; no Airflow installation.
+requests==2.34.2
+python-dotenv==1.2.3
+psycopg[binary]==3.3.5
+dbt-core==1.12.5
+dbt-postgres==1.11.0
