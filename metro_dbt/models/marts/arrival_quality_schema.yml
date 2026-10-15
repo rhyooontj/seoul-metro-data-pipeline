@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: mart_arrival_quality_daily
+    description: >-
+      API 생성 시각(received_at)을 한국 시간으로 해석한 날짜, 역명, 실제 호선
+      식별자 subway_id, 방향별 품질 집계. 모든 원본 관측과 0초 전용 그룹을
+      보존한다. 평균은 API 응답 수치의 평균이며 실제 승객 대기시간이 아니다.
+      비율은 0~1, 시간 단위는 초이며 평균을 반올림하지 않는다.
+    columns:
+      - name: received_date
+        description: API 생성 시각의 날짜. 파이프라인 수집 날짜가 아니다.
+        data_tests: [not_null]
+      - name: station_name
+        data_tests: [not_null]
+      - name: subway_id
+        description: 실제 호선 ID. 행선지 문자열 train_line을 사용하지 않는다.
+        data_tests: [not_null]
+      - name: direction
+        data_tests: [not_null]
+      - name: arrival_record_count
+        description: 반복 관측을 포함한 전체 API 도착정보 레코드 수.
+        data_tests: [not_null]
+      - name: zero_arrival_count
+        data_tests: [not_null]
+      - name: positive_arrival_count
+        data_tests: [not_null]
+      - name: null_arrival_count
+        description: 도착 예정 시간 NULL 건수. 전체 평균 재집계 분모에 사용한다.
+        data_tests: [not_null]
+      - name: negative_arrival_count
+        description: 음수 건수. 전체 건수의 범주별 정합성 확인용.
+        data_tests: [not_null]
+      - name: zero_arrival_rate
+        description: 0초 건수 / 전체 레코드 수. 0~1이며 화면에서 백분율로 표시한다.
+        data_tests: [not_null]
+      - name: avg_arrival_seconds
+        description: 0초·음수를 포함하고 NULL은 제외하는 전체 수치 평균. 전부 NULL이면 NULL.
+      - name: avg_positive_arrival_seconds
+        description: 양수값만의 조건부 평균. 양수 건수가 0이면 NULL. 실제 평균 대기시간이 아니다.
+      - name: arrival_seconds_sum
+        description: 전체 수치 합계. NULL은 제외하며 전부 NULL이면 NULL.
+      - name: positive_arrival_seconds_sum
+        description: 양수값 합계. 양수 건수가 0이면 0.
+        data_tests: [not_null]

@@ -1,0 +1,177 @@
+{
+  "raw": {
+    "n": 31987,
+    "checksum": "defec9f4b54d89fcf40ad4752c847920"
+  },
+  "existing_relations": {
+    "mart_station_arrival_summary": {
+      "rows": {
+        "n": 398,
+        "checksum": "252e1e9e351ed9801d6889484d35c608"
+      },
+      "columns": [
+        {
+          "column_name": "station_name",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "direction",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "train_line",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "arrival_count",
+          "data_type": "bigint",
+          "udt_name": "int8"
+        },
+        {
+          "column_name": "avg_arrival_seconds",
+          "data_type": "numeric",
+          "udt_name": "numeric"
+        },
+        {
+          "column_name": "min_arrival_seconds",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "max_arrival_seconds",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "latest_received_at",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp"
+        }
+      ]
+    },
+    "mart_station_daily_summary": {
+      "rows": {
+        "n": 2745,
+        "checksum": "fb1461893ce90a7ae00604e741cd78e8"
+      },
+      "columns": [
+        {
+          "column_name": "received_date",
+          "data_type": "date",
+          "udt_name": "date"
+        },
+        {
+          "column_name": "station_name",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "direction",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "train_line",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "arrival_record_count",
+          "data_type": "bigint",
+          "udt_name": "int8"
+        },
+        {
+          "column_name": "avg_arrival_seconds",
+          "data_type": "numeric",
+          "udt_name": "numeric"
+        },
+        {
+          "column_name": "min_arrival_seconds",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "max_arrival_seconds",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "latest_received_at",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp"
+        }
+      ]
+    },
+    "mart_station_hourly_summary": {
+      "rows": {
+        "n": 8539,
+        "checksum": "77bf469586963ee1d8ee82e988669e97"
+      },
+      "columns": [
+        {
+          "column_name": "received_date",
+          "data_type": "date",
+          "udt_name": "date"
+        },
+        {
+          "column_name": "received_hour",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "station_name",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "direction",
+          "data_type": "character varying",
+          "udt_name": "varchar"
+        },
+        {
+          "column_name": "arrival_record_count",
+          "data_type": "bigint",
+          "udt_name": "int8"
+        },
+        {
+          "column_name": "avg_arrival_seconds",
+          "data_type": "numeric",
+          "udt_name": "numeric"
+        },
+        {
+          "column_name": "min_arrival_seconds",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "max_arrival_seconds",
+          "data_type": "integer",
+          "udt_name": "int4"
+        },
+        {
+          "column_name": "latest_received_at",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp"
+        }
+      ]
+    }
+  },
+  "existing_dbt_files": {
+    "metro_dbt\\models\\marts\\mart_station_arrival_summary.sql": "ad58062103ed159366e019bb5c3bad41cfedc6636ca4596374f3b57fb870dba5",
+    "metro_dbt\\models\\marts\\mart_station_daily_summary.sql": "d99c1ca4153671dc0bb4a0189a504a15bd614d73deb4ad343e1507da35457f51",
+    "metro_dbt\\models\\marts\\mart_station_hourly_summary.sql": "19c52c800e0639b91ba256ecf21929222c4582457d6006de689f0c9bd173f6ce",
+    "metro_dbt\\models\\marts\\schema.yml": "213edd276aef2efed98ad73c898b84b62d500834147b92aa8674e4a797db1d35",
+    "metro_dbt\\models\\staging\\schema.yml": "54594920c69cb00b05977b884c958233e7e7d8339abf7a607f80b56e6a7d3a87",
+    "metro_dbt\\models\\staging\\sources.yml": "12e3db0b53d59e546de28ecb42751a55e2d123b9fff6589b977a803832c47cbc",
+    "metro_dbt\\models\\staging\\stg_subway_arrival.sql": "6fa91183b633af2c2dc8a2be215d83c038bcf3ef8df531f7a309940598227df9",
+    "metro_dbt\\tests\\.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metro_dbt\\tests\\mart_station_daily_summary_grain.sql": "92dd5d9a6f4562def31690f8f3f6afbf073571a59fedfbeb35c24a19b1799a91",
+    "metro_dbt\\tests\\mart_station_daily_summary_reconciliation.sql": "2feec654bdec3f029f3bc294b2c253237b3bac6da81ef7981f45b3dbe68d3ecb",
+    "metro_dbt\\tests\\test_mart_station_arrival_grain.sql": "b98dedb2a74012392b1cfd91c5de74f75463b6f41b723d379daa724ef05f7eaf",
+    "metro_dbt\\tests\\test_mart_station_arrival_metrics.sql": "22ade5cb7331069789cd68092b91bf4f84eb81a13480475559f847183f188634",
+    "metro_dbt\\tests\\warn_source_exact_duplicates.sql": "eb08e8ece18e5058c7b3a8de79f0f2476c705339707ae14b58d7ec39678d33d9"
+  }
+}

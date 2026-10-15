@@ -1,3 +1,6 @@
+
+from datetime import timedelta
+
 import pendulum
 
 from airflow.sdk import DAG
@@ -9,6 +12,7 @@ with DAG(
     start_date=pendulum.datetime(2026, 9, 30, tz="Asia/Seoul"),
     schedule="*/30 * * * *",
     catchup=False,
+    max_active_runs=1,
     tags=["seoul", "subway", "etl"],
 ) as dag:
 
@@ -16,6 +20,8 @@ with DAG(
         task_id="extract",
         bash_command="python /opt/airflow/src/extract.py",
         cwd="/opt/airflow",
+        retries=1,
+        retry_delay=timedelta(minutes=5),
     )
 
     transform = BashOperator(

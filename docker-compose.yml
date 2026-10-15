@@ -1,3 +1,4 @@
+
 services:
   postgres:
     image: postgres:17
@@ -25,7 +26,6 @@ services:
       retries: 10
       start_period: 30s
 
-
   airflow:
     build:
       context: .
@@ -49,6 +49,8 @@ services:
       - "8080:8080"
 
     volumes:
+      - airflow_state:/opt/airflow
+      - airflow_logs:/opt/airflow/logs
       - ./dags:/opt/airflow/dags
       - ./src:/opt/airflow/src
       - ./data:/opt/airflow/data
@@ -58,7 +60,6 @@ services:
       postgres:
         condition: service_healthy
 
-
   metabase:
     image: metabase/metabase:latest
     container_name: seoul-metro-metabase
@@ -66,9 +67,23 @@ services:
     ports:
       - "3000:3000"
 
+    volumes:
+      - metabase_data:/metabase.db
+
     depends_on:
       - postgres
 
-
 volumes:
   postgres_data:
+
+  metabase_data:
+    external: true
+    name: seoul-metro-metabase-data
+
+  airflow_state:
+    external: true
+    name: seoul-metro-airflow-state
+
+  airflow_logs:
+    external: true
+    name: seoul-metro-airflow-logs

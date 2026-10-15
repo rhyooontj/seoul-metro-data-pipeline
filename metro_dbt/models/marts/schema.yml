@@ -19,3 +19,35 @@ models:
       - name: latest_received_at
         data_tests:
           - not_null
+
+  - name: mart_station_daily_summary
+    description: API 수신 시각을 한국 시간으로 해석한 날짜, 역, 방향, 노선별 집계. 미래 시각 이상값도 원본 그대로 포함한다.
+    columns:
+      - name: received_date
+        data_tests:
+          - not_null
+      - name: station_name
+        data_tests:
+          - not_null
+      - name: direction
+        data_tests:
+          - not_null
+      - name: train_line
+        data_tests:
+          - not_null
+      - name: arrival_record_count
+        description: 해당 그룹에 포함된 API 도착정보 레코드 수
+        data_tests:
+          - not_null
+      - name: avg_arrival_seconds
+        data_tests:
+          - not_null
+      - name: min_arrival_seconds
+        data_tests:
+          - not_null
+      - name: max_arrival_seconds
+        data_tests:
+          - not_null
+      - name: latest_received_at
+        data_tests:
+          - not_null

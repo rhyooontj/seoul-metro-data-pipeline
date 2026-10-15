@@ -1,0 +1,815 @@
+{
+  "dbt_files_before": {
+    "metro_dbt\\models\\marts\\arrival_quality_schema.yml": "80eb0ad7b4803dd2a24f52069e665a5400e791667b23aea1f22018bb9881903f",
+    "metro_dbt\\models\\marts\\mart_arrival_quality_daily.sql": "3a8c9d6a036febf9ea0e5af34c2146310d60559e5df9fcbbdb7410a5924a4c74",
+    "metro_dbt\\models\\marts\\mart_station_arrival_summary.sql": "ad58062103ed159366e019bb5c3bad41cfedc6636ca4596374f3b57fb870dba5",
+    "metro_dbt\\models\\marts\\mart_station_daily_summary.sql": "d99c1ca4153671dc0bb4a0189a504a15bd614d73deb4ad343e1507da35457f51",
+    "metro_dbt\\models\\marts\\mart_station_hourly_summary.sql": "19c52c800e0639b91ba256ecf21929222c4582457d6006de689f0c9bd173f6ce",
+    "metro_dbt\\models\\marts\\schema.yml": "213edd276aef2efed98ad73c898b84b62d500834147b92aa8674e4a797db1d35",
+    "metro_dbt\\models\\staging\\schema.yml": "54594920c69cb00b05977b884c958233e7e7d8339abf7a607f80b56e6a7d3a87",
+    "metro_dbt\\models\\staging\\sources.yml": "12e3db0b53d59e546de28ecb42751a55e2d123b9fff6589b977a803832c47cbc",
+    "metro_dbt\\models\\staging\\stg_subway_arrival.sql": "6fa91183b633af2c2dc8a2be215d83c038bcf3ef8df531f7a309940598227df9",
+    "metro_dbt\\tests\\.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_counts.sql": "9af652a24df2ff418c62d09d07f26996fea9bf3df47cc8a86482ea0caf15004e",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_grain.sql": "a0a7c19e6cf7db15858089ecb354ed4f6ee07c7e3160340cd05f68308b98c2fb",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_metrics.sql": "fe2b3160e37296b3fce92d543c24a670a2b053b7fdd2394dc371ae0741913dce",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_reconciliation.sql": "5cd75a160c6f2735c5ab6be55969473cc1d6976e536f4ca3346676dba38b4501",
+    "metro_dbt\\tests\\mart_station_daily_summary_grain.sql": "92dd5d9a6f4562def31690f8f3f6afbf073571a59fedfbeb35c24a19b1799a91",
+    "metro_dbt\\tests\\mart_station_daily_summary_reconciliation.sql": "2feec654bdec3f029f3bc294b2c253237b3bac6da81ef7981f45b3dbe68d3ecb",
+    "metro_dbt\\tests\\test_mart_station_arrival_grain.sql": "b98dedb2a74012392b1cfd91c5de74f75463b6f41b723d379daa724ef05f7eaf",
+    "metro_dbt\\tests\\test_mart_station_arrival_metrics.sql": "22ade5cb7331069789cd68092b91bf4f84eb81a13480475559f847183f188634",
+    "metro_dbt\\tests\\warn_source_exact_duplicates.sql": "eb08e8ece18e5058c7b3a8de79f0f2476c705339707ae14b58d7ec39678d33d9"
+  },
+  "queries": {
+    "01_line_zero_arrival_rate.sql": {
+      "rows": 13,
+      "raw_aggregate_differences": 0,
+      "total_records": "31982",
+      "zero_records": "10524",
+      "positive_records": "21458",
+      "results": [
+        {
+          "subway_id": "1008",
+          "subway_name": "8호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1007",
+          "zero_arrival_count": "1007",
+          "positive_arrival_count": "0",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "1.00000000000000000000"
+        },
+        {
+          "subway_id": "1063",
+          "subway_name": "경의중앙선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1386",
+          "zero_arrival_count": "1386",
+          "positive_arrival_count": "0",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "1.00000000000000000000"
+        },
+        {
+          "subway_id": "1065",
+          "subway_name": "공항철도",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1232",
+          "zero_arrival_count": "1232",
+          "positive_arrival_count": "0",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "1.00000000000000000000"
+        },
+        {
+          "subway_id": "1075",
+          "subway_name": "수인분당선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1614",
+          "zero_arrival_count": "1614",
+          "positive_arrival_count": "0",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "1.00000000000000000000"
+        },
+        {
+          "subway_id": "1077",
+          "subway_name": "신분당선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1023",
+          "zero_arrival_count": "1023",
+          "positive_arrival_count": "0",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "1.00000000000000000000"
+        },
+        {
+          "subway_id": "1001",
+          "subway_name": "1호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "3347",
+          "zero_arrival_count": "2843",
+          "positive_arrival_count": "504",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.84941738870630415297"
+        },
+        {
+          "subway_id": "1004",
+          "subway_name": "4호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1731",
+          "zero_arrival_count": "1062",
+          "positive_arrival_count": "669",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.61351819757365684575"
+        },
+        {
+          "subway_id": "1003",
+          "subway_name": "3호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1928",
+          "zero_arrival_count": "357",
+          "positive_arrival_count": "1571",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.18516597510373443983"
+        },
+        {
+          "subway_id": "1002",
+          "subway_name": "2호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "11286",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "11286",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-24"
+        },
+        {
+          "subway_id": "1005",
+          "subway_name": "5호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "2979",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "2979",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20"
+        },
+        {
+          "subway_id": "1006",
+          "subway_name": "6호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1327",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1327",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20"
+        },
+        {
+          "subway_id": "1007",
+          "subway_name": "7호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1771",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1771",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20"
+        },
+        {
+          "subway_id": "1009",
+          "subway_name": "9호선",
+          "line_mapping_verified": true,
+          "arrival_record_count": "1351",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1351",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20"
+        }
+      ]
+    },
+    "02_station_arrival_metrics.sql": {
+      "rows": 18,
+      "raw_aggregate_differences": 0,
+      "total_records": "31982",
+      "zero_records": "10524",
+      "positive_records": "21458",
+      "results": [
+        {
+          "station_name": "강남",
+          "subway_ids": "1002, 1077",
+          "arrival_record_count": "1821",
+          "zero_arrival_count": "1023",
+          "positive_arrival_count": "798",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.56177924217462932455",
+          "arrival_seconds_sum": "299710",
+          "positive_arrival_seconds_sum": "299710",
+          "avg_arrival_seconds": "164.5853926414058210",
+          "avg_positive_arrival_seconds": "375.5764411027568922"
+        },
+        {
+          "station_name": "공덕",
+          "subway_ids": "1005, 1006, 1063, 1065",
+          "arrival_record_count": "1816",
+          "zero_arrival_count": "951",
+          "positive_arrival_count": "865",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.52367841409691629956",
+          "arrival_seconds_sum": "311340",
+          "positive_arrival_seconds_sum": "311340",
+          "avg_arrival_seconds": "171.4427312775330396",
+          "avg_positive_arrival_seconds": "359.9306358381502890"
+        },
+        {
+          "station_name": "교대",
+          "subway_ids": "1002, 1003",
+          "arrival_record_count": "1798",
+          "zero_arrival_count": "221",
+          "positive_arrival_count": "1577",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.12291434927697441602",
+          "arrival_seconds_sum": "618140",
+          "positive_arrival_seconds_sum": "618140",
+          "avg_arrival_seconds": "343.7931034482758621",
+          "avg_positive_arrival_seconds": "391.9720989220038047"
+        },
+        {
+          "station_name": "사당",
+          "subway_ids": "1002, 1004",
+          "arrival_record_count": "1808",
+          "zero_arrival_count": "957",
+          "positive_arrival_count": "851",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.52931415929203539823",
+          "arrival_seconds_sum": "330124",
+          "positive_arrival_seconds_sum": "330124",
+          "avg_arrival_seconds": "182.5907079646017699",
+          "avg_positive_arrival_seconds": "387.9247943595769683"
+        },
+        {
+          "station_name": "선릉",
+          "subway_ids": "1002, 1075",
+          "arrival_record_count": "1788",
+          "zero_arrival_count": "956",
+          "positive_arrival_count": "832",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.53467561521252796421",
+          "arrival_seconds_sum": "294790",
+          "positive_arrival_seconds_sum": "294790",
+          "avg_arrival_seconds": "164.8713646532438479",
+          "avg_positive_arrival_seconds": "354.3149038461538462"
+        },
+        {
+          "station_name": "시청",
+          "subway_ids": "1001, 1002",
+          "arrival_record_count": "1828",
+          "zero_arrival_count": "1020",
+          "positive_arrival_count": "808",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.55798687089715536105",
+          "arrival_seconds_sum": "224016",
+          "positive_arrival_seconds_sum": "224016",
+          "avg_arrival_seconds": "122.5470459518599562",
+          "avg_positive_arrival_seconds": "277.2475247524752475"
+        },
+        {
+          "station_name": "신촌",
+          "subway_ids": "1002",
+          "arrival_record_count": "1409",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1409",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20",
+          "arrival_seconds_sum": "453970",
+          "positive_arrival_seconds_sum": "453970",
+          "avg_arrival_seconds": "322.1930447125621008",
+          "avg_positive_arrival_seconds": "322.1930447125621008"
+        },
+        {
+          "station_name": "잠실",
+          "subway_ids": "1002, 1008",
+          "arrival_record_count": "1818",
+          "zero_arrival_count": "1007",
+          "positive_arrival_count": "811",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.55390539053905390539",
+          "arrival_seconds_sum": "284770",
+          "positive_arrival_seconds_sum": "284770",
+          "avg_arrival_seconds": "156.6391639163916392",
+          "avg_positive_arrival_seconds": "351.1344019728729963"
+        },
+        {
+          "station_name": "합정",
+          "subway_ids": "1002, 1006",
+          "arrival_record_count": "1817",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1817",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20",
+          "arrival_seconds_sum": "695130",
+          "positive_arrival_seconds_sum": "695130",
+          "avg_arrival_seconds": "382.5701706108970831",
+          "avg_positive_arrival_seconds": "382.5701706108970831"
+        },
+        {
+          "station_name": "신도림",
+          "subway_ids": "1001, 1002",
+          "arrival_record_count": "1826",
+          "zero_arrival_count": "1155",
+          "positive_arrival_count": "671",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.63253012048192771084",
+          "arrival_seconds_sum": "251890",
+          "positive_arrival_seconds_sum": "251890",
+          "avg_arrival_seconds": "137.9463307776560789",
+          "avg_positive_arrival_seconds": "375.3949329359165425"
+        },
+        {
+          "station_name": "여의도",
+          "subway_ids": "1005, 1009",
+          "arrival_record_count": "1808",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1808",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20",
+          "arrival_seconds_sum": "663715",
+          "positive_arrival_seconds_sum": "663715",
+          "avg_arrival_seconds": "367.0990044247787611",
+          "avg_positive_arrival_seconds": "367.0990044247787611"
+        },
+        {
+          "station_name": "왕십리",
+          "subway_ids": "1002, 1005, 1063, 1075",
+          "arrival_record_count": "1883",
+          "zero_arrival_count": "1073",
+          "positive_arrival_count": "810",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.56983536909187466808",
+          "arrival_seconds_sum": "229830",
+          "positive_arrival_seconds_sum": "229830",
+          "avg_arrival_seconds": "122.0552310143388210",
+          "avg_positive_arrival_seconds": "283.7407407407407407"
+        },
+        {
+          "station_name": "건대입구",
+          "subway_ids": "1002, 1007",
+          "arrival_record_count": "1854",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1854",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20",
+          "arrival_seconds_sum": "710760",
+          "positive_arrival_seconds_sum": "710760",
+          "avg_arrival_seconds": "383.3656957928802589",
+          "avg_positive_arrival_seconds": "383.3656957928802589"
+        },
+        {
+          "station_name": "홍대입구",
+          "subway_ids": "1002, 1063, 1065",
+          "arrival_record_count": "1814",
+          "zero_arrival_count": "1252",
+          "positive_arrival_count": "562",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.69018743109151047409",
+          "arrival_seconds_sum": "182610",
+          "positive_arrival_seconds_sum": "182610",
+          "avg_arrival_seconds": "100.6670341786108049",
+          "avg_positive_arrival_seconds": "324.9288256227758007"
+        },
+        {
+          "station_name": "고속터미널",
+          "subway_ids": "1003, 1007, 1009",
+          "arrival_record_count": "1833",
+          "zero_arrival_count": "57",
+          "positive_arrival_count": "1776",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.03109656301145662848",
+          "arrival_seconds_sum": "679430",
+          "positive_arrival_seconds_sum": "679430",
+          "avg_arrival_seconds": "370.6655755591925805",
+          "avg_positive_arrival_seconds": "382.5619369369369369"
+        },
+        {
+          "station_name": "을지로입구",
+          "subway_ids": "1002",
+          "arrival_record_count": "1409",
+          "zero_arrival_count": "0",
+          "positive_arrival_count": "1409",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0E-20",
+          "arrival_seconds_sum": "460920",
+          "positive_arrival_seconds_sum": "460920",
+          "avg_arrival_seconds": "327.1256210078069553",
+          "avg_positive_arrival_seconds": "327.1256210078069553"
+        },
+        {
+          "station_name": "동대문역사문화공원",
+          "subway_ids": "1002, 1004, 1005",
+          "arrival_record_count": "1821",
+          "zero_arrival_count": "105",
+          "positive_arrival_count": "1716",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.05766062602965403624",
+          "arrival_seconds_sum": "635150",
+          "positive_arrival_seconds_sum": "635150",
+          "avg_arrival_seconds": "348.7918725974739154",
+          "avg_positive_arrival_seconds": "370.1340326340326340"
+        },
+        {
+          "station_name": "종로3가",
+          "subway_ids": "1001, 1003, 1005",
+          "arrival_record_count": "1831",
+          "zero_arrival_count": "747",
+          "positive_arrival_count": "1084",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.40797378481703986892",
+          "arrival_seconds_sum": "324330",
+          "positive_arrival_seconds_sum": "324330",
+          "avg_arrival_seconds": "177.1327143637356636",
+          "avg_positive_arrival_seconds": "299.1974169741697417"
+        }
+      ]
+    },
+    "03_daily_zero_arrival_trend.sql": {
+      "rows": 13,
+      "raw_aggregate_differences": 0,
+      "total_records": "31982",
+      "zero_records": "10524",
+      "positive_records": "21458",
+      "results": [
+        {
+          "received_date": "2026-09-30",
+          "arrival_record_count": "5",
+          "zero_arrival_count": "2",
+          "positive_arrival_count": "3",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.40000000000000000000"
+        },
+        {
+          "received_date": "2026-10-01",
+          "arrival_record_count": "1498",
+          "zero_arrival_count": "507",
+          "positive_arrival_count": "991",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.33845126835781041389"
+        },
+        {
+          "received_date": "2026-10-02",
+          "arrival_record_count": "3620",
+          "zero_arrival_count": "1167",
+          "positive_arrival_count": "2453",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.32237569060773480663"
+        },
+        {
+          "received_date": "2026-10-03",
+          "arrival_record_count": "3602",
+          "zero_arrival_count": "1147",
+          "positive_arrival_count": "2455",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.31843420322043309273"
+        },
+        {
+          "received_date": "2026-10-04",
+          "arrival_record_count": "3471",
+          "zero_arrival_count": "1150",
+          "positive_arrival_count": "2321",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.33131662345145491213"
+        },
+        {
+          "received_date": "2026-10-05",
+          "arrival_record_count": "2181",
+          "zero_arrival_count": "699",
+          "positive_arrival_count": "1482",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.32049518569463548831"
+        },
+        {
+          "received_date": "2026-10-06",
+          "arrival_record_count": "3464",
+          "zero_arrival_count": "1171",
+          "positive_arrival_count": "2293",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.33804849884526558891"
+        },
+        {
+          "received_date": "2026-10-07",
+          "arrival_record_count": "3417",
+          "zero_arrival_count": "1127",
+          "positive_arrival_count": "2290",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.32982148083113842552"
+        },
+        {
+          "received_date": "2026-10-08",
+          "arrival_record_count": "3327",
+          "zero_arrival_count": "1112",
+          "positive_arrival_count": "2215",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.33423504658851818455"
+        },
+        {
+          "received_date": "2026-10-09",
+          "arrival_record_count": "3590",
+          "zero_arrival_count": "1159",
+          "positive_arrival_count": "2431",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.32284122562674094708"
+        },
+        {
+          "received_date": "2026-10-10",
+          "arrival_record_count": "69",
+          "zero_arrival_count": "26",
+          "positive_arrival_count": "43",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.37681159420289855072"
+        },
+        {
+          "received_date": "2026-10-11",
+          "arrival_record_count": "1581",
+          "zero_arrival_count": "515",
+          "positive_arrival_count": "1066",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.32574320050600885515"
+        },
+        {
+          "received_date": "2026-10-12",
+          "arrival_record_count": "2157",
+          "zero_arrival_count": "742",
+          "positive_arrival_count": "1415",
+          "null_arrival_count": "0",
+          "negative_arrival_count": "0",
+          "zero_arrival_rate": "0.34399629114510894761"
+        }
+      ]
+    }
+  },
+  "transaction": {
+    "read_only": "on",
+    "isolation": "repeatable read",
+    "checked_at": "2026-10-12 12:51:11.557276+00:00"
+  },
+  "before": {
+    "public.subway_arrival": {
+      "rows": 31987,
+      "content_checksum": "5716c2d3b509ed3dab534c5187b95287"
+    },
+    "analytics.mart_arrival_quality_daily": {
+      "rows": 877,
+      "content_checksum": "9b5d3c21026ba9181e4e3bc5532fc517"
+    },
+    "analytics.mart_station_arrival_summary": {
+      "rows": 398,
+      "content_checksum": "252e1e9e351ed9801d6889484d35c608"
+    },
+    "analytics.mart_station_daily_summary": {
+      "rows": 2745,
+      "content_checksum": "fb1461893ce90a7ae00604e741cd78e8"
+    },
+    "analytics.mart_station_hourly_summary": {
+      "rows": 8539,
+      "content_checksum": "77bf469586963ee1d8ee82e988669e97"
+    }
+  },
+  "columns": [
+    {
+      "column_name": "received_date",
+      "data_type": "date",
+      "udt_name": "date",
+      "character_maximum_length": null,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "station_name",
+      "data_type": "character varying",
+      "udt_name": "varchar",
+      "character_maximum_length": 100,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "subway_id",
+      "data_type": "character varying",
+      "udt_name": "varchar",
+      "character_maximum_length": 20,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "direction",
+      "data_type": "character varying",
+      "udt_name": "varchar",
+      "character_maximum_length": 20,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "arrival_record_count",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    },
+    {
+      "column_name": "zero_arrival_count",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    },
+    {
+      "column_name": "positive_arrival_count",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    },
+    {
+      "column_name": "null_arrival_count",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    },
+    {
+      "column_name": "negative_arrival_count",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    },
+    {
+      "column_name": "zero_arrival_rate",
+      "data_type": "numeric",
+      "udt_name": "numeric",
+      "character_maximum_length": null,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "avg_arrival_seconds",
+      "data_type": "numeric",
+      "udt_name": "numeric",
+      "character_maximum_length": null,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "avg_positive_arrival_seconds",
+      "data_type": "numeric",
+      "udt_name": "numeric",
+      "character_maximum_length": null,
+      "numeric_precision": null,
+      "numeric_scale": null
+    },
+    {
+      "column_name": "arrival_seconds_sum",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    },
+    {
+      "column_name": "positive_arrival_seconds_sum",
+      "data_type": "bigint",
+      "udt_name": "int8",
+      "character_maximum_length": null,
+      "numeric_precision": 64,
+      "numeric_scale": 0
+    }
+  ],
+  "raw_checksum": {
+    "rows": 31987,
+    "checksum": "defec9f4b54d89fcf40ad4752c847920"
+  },
+  "mart_raw_differences": 0,
+  "scopes": [
+    {
+      "scope": "all",
+      "arrival_record_count": 31987,
+      "zero_arrival_count": 10527,
+      "positive_arrival_count": 21460,
+      "null_arrival_count": 0,
+      "negative_arrival_count": 0,
+      "zero_arrival_rate": "0.32910244786944696283",
+      "arrival_seconds_sum": 7650985,
+      "positive_arrival_seconds_sum": 7650985,
+      "avg_arrival_seconds": "239.1904523712758308",
+      "avg_positive_arrival_seconds": "356.5230661696178938"
+    },
+    {
+      "scope": "since_20260930",
+      "arrival_record_count": 31982,
+      "zero_arrival_count": 10524,
+      "positive_arrival_count": 21458,
+      "null_arrival_count": 0,
+      "negative_arrival_count": 0,
+      "zero_arrival_rate": "0.32906009630417109624",
+      "arrival_seconds_sum": 7650625,
+      "positive_arrival_seconds_sum": 7650625,
+      "avg_arrival_seconds": "239.2165905822024889",
+      "avg_positive_arrival_seconds": "356.5395190604902600"
+    }
+  ],
+  "unmapped_lines": [],
+  "zero_only_groups": {
+    "groups": 205,
+    "observations": "7450",
+    "invalid_groups": 0
+  },
+  "zero_only_rollup_avg": null,
+  "station_query_zero_only_input": {
+    "result_rows": 11,
+    "all_positive_averages_null": true
+  },
+  "after_same_snapshot": {
+    "public.subway_arrival": {
+      "rows": 31987,
+      "content_checksum": "5716c2d3b509ed3dab534c5187b95287"
+    },
+    "analytics.mart_arrival_quality_daily": {
+      "rows": 877,
+      "content_checksum": "9b5d3c21026ba9181e4e3bc5532fc517"
+    },
+    "analytics.mart_station_arrival_summary": {
+      "rows": 398,
+      "content_checksum": "252e1e9e351ed9801d6889484d35c608"
+    },
+    "analytics.mart_station_daily_summary": {
+      "rows": 2745,
+      "content_checksum": "fb1461893ce90a7ae00604e741cd78e8"
+    },
+    "analytics.mart_station_hourly_summary": {
+      "rows": 8539,
+      "content_checksum": "77bf469586963ee1d8ee82e988669e97"
+    }
+  },
+  "after_fresh_connection": {
+    "public.subway_arrival": {
+      "rows": 31987,
+      "content_checksum": "5716c2d3b509ed3dab534c5187b95287"
+    },
+    "analytics.mart_arrival_quality_daily": {
+      "rows": 877,
+      "content_checksum": "9b5d3c21026ba9181e4e3bc5532fc517"
+    },
+    "analytics.mart_station_arrival_summary": {
+      "rows": 398,
+      "content_checksum": "252e1e9e351ed9801d6889484d35c608"
+    },
+    "analytics.mart_station_daily_summary": {
+      "rows": 2745,
+      "content_checksum": "fb1461893ce90a7ae00604e741cd78e8"
+    },
+    "analytics.mart_station_hourly_summary": {
+      "rows": 8539,
+      "content_checksum": "77bf469586963ee1d8ee82e988669e97"
+    }
+  },
+  "dbt_files_after": {
+    "metro_dbt\\models\\marts\\arrival_quality_schema.yml": "80eb0ad7b4803dd2a24f52069e665a5400e791667b23aea1f22018bb9881903f",
+    "metro_dbt\\models\\marts\\mart_arrival_quality_daily.sql": "3a8c9d6a036febf9ea0e5af34c2146310d60559e5df9fcbbdb7410a5924a4c74",
+    "metro_dbt\\models\\marts\\mart_station_arrival_summary.sql": "ad58062103ed159366e019bb5c3bad41cfedc6636ca4596374f3b57fb870dba5",
+    "metro_dbt\\models\\marts\\mart_station_daily_summary.sql": "d99c1ca4153671dc0bb4a0189a504a15bd614d73deb4ad343e1507da35457f51",
+    "metro_dbt\\models\\marts\\mart_station_hourly_summary.sql": "19c52c800e0639b91ba256ecf21929222c4582457d6006de689f0c9bd173f6ce",
+    "metro_dbt\\models\\marts\\schema.yml": "213edd276aef2efed98ad73c898b84b62d500834147b92aa8674e4a797db1d35",
+    "metro_dbt\\models\\staging\\schema.yml": "54594920c69cb00b05977b884c958233e7e7d8339abf7a607f80b56e6a7d3a87",
+    "metro_dbt\\models\\staging\\sources.yml": "12e3db0b53d59e546de28ecb42751a55e2d123b9fff6589b977a803832c47cbc",
+    "metro_dbt\\models\\staging\\stg_subway_arrival.sql": "6fa91183b633af2c2dc8a2be215d83c038bcf3ef8df531f7a309940598227df9",
+    "metro_dbt\\tests\\.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_counts.sql": "9af652a24df2ff418c62d09d07f26996fea9bf3df47cc8a86482ea0caf15004e",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_grain.sql": "a0a7c19e6cf7db15858089ecb354ed4f6ee07c7e3160340cd05f68308b98c2fb",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_metrics.sql": "fe2b3160e37296b3fce92d543c24a670a2b053b7fdd2394dc371ae0741913dce",
+    "metro_dbt\\tests\\mart_arrival_quality_daily_reconciliation.sql": "5cd75a160c6f2735c5ab6be55969473cc1d6976e536f4ca3346676dba38b4501",
+    "metro_dbt\\tests\\mart_station_daily_summary_grain.sql": "92dd5d9a6f4562def31690f8f3f6afbf073571a59fedfbeb35c24a19b1799a91",
+    "metro_dbt\\tests\\mart_station_daily_summary_reconciliation.sql": "2feec654bdec3f029f3bc294b2c253237b3bac6da81ef7981f45b3dbe68d3ecb",
+    "metro_dbt\\tests\\test_mart_station_arrival_grain.sql": "b98dedb2a74012392b1cfd91c5de74f75463b6f41b723d379daa724ef05f7eaf",
+    "metro_dbt\\tests\\test_mart_station_arrival_metrics.sql": "22ade5cb7331069789cd68092b91bf4f84eb81a13480475559f847183f188634",
+    "metro_dbt\\tests\\warn_source_exact_duplicates.sql": "eb08e8ece18e5058c7b3a8de79f0f2476c705339707ae14b58d7ec39678d33d9"
+  },
+  "preserved": true
+}
